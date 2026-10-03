@@ -11,6 +11,8 @@ import { LegalPage } from './pages/LegalPage';
 import { getToolBySlug } from './registry/tools';
 import { MetaTags } from './components/MetaTags';
 
+import { NetworkBackground } from './components/NetworkBackground';
+
 export function App() {
   const [darkMode, setDarkMode] = useState<boolean>(() => {
     const saved = localStorage.getItem('pdfcraft_theme');
@@ -61,7 +63,8 @@ export function App() {
   );
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col font-sans transition-colors duration-250">
+    <div className="min-h-screen bg-transparent text-slate-100 flex flex-col font-sans transition-colors duration-250">
+      <NetworkBackground />
       <Header
         onOpenSearch={() => setIsSearchOpen(true)}
         activeCategory={activeCategory}
