@@ -13,6 +13,8 @@ import { MetaTags } from '../components/MetaTags';
 import { ToolIcon } from '../components/ToolIcon';
 import { useReveal, spotlight } from '../hooks/useReveal';
 
+import { HeroNetwork } from '../components/HeroNetwork';
+
 interface HomePageProps {
   onSelectTool: (slug: string) => void;
   onOpenSearch: () => void;
@@ -46,41 +48,29 @@ export const HomePage: React.FC<HomePageProps> = ({
         description="Free online PDF tools platform. Compress, merge, split, convert, edit, sign, watermark, and OCR PDF files in your browser."
       />
 
-      <section className="text-center py-12 px-4 sm:py-20 space-y-6 relative overflow-hidden rounded-3xl">
-        <div className="bg-aurora" aria-hidden="true">
-          <span className="blob blob-1" /><span className="blob blob-2" /><span className="blob blob-3" />
-        </div>
-        <div className="relative z-10 space-y-6">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-200 dark:border-indigo-800 text-indigo-600 dark:text-indigo-400 text-xs font-bold uppercase tracking-wider shadow-sm">
-          <ShieldCheck className="w-4 h-4 text-emerald-500" /> 100% Private Client-Side PDF Engine
-        </div>
+      <HeroNetwork
+        title="APKPure Developer Console"
+        subtitle="Connect With the Worldwide Android Users Through APKPure Open Development Platform."
+        buttonText="Sign in"
+        buttonLink="#signin"
+      />
 
-        <h1 className="text-4xl sm:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight font-heading max-w-4xl mx-auto leading-[1.15]">
-          All Your <span className="gradient-text-animated">PDF Tools</span> in One Place
-        </h1>
-
-        <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
-          Compress, merge, split, convert, edit, sign, and manage PDF documents online with zero server uploads and total privacy.
-        </p>
-
-        <div className="max-w-xl mx-auto pt-2">
-          <div
-            onClick={onOpenSearch}
-            className="w-full flex items-center justify-between p-3 sm:p-4 bg-white dark:bg-slate-900 border-2 border-indigo-500/30 dark:border-indigo-500/40 rounded-2xl shadow-2xl hover:border-indigo-500 cursor-pointer transition-all group"
-          >
-            <div className="flex items-center gap-3 text-slate-400">
-              <Search className="w-5 h-5 text-indigo-500 group-hover:scale-110 transition-transform" />
-              <span className="text-slate-500 dark:text-slate-400 text-sm sm:text-base font-sans">
-                Search tools (e.g. Merge, Compress, OCR, Rotate)...
-              </span>
-            </div>
-            <kbd className="hidden sm:inline-block px-2.5 py-1 text-xs font-mono font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950 rounded-lg">
-              Ctrl + K
-            </kbd>
+      <div className="max-w-xl mx-auto pt-2">
+        <div
+          onClick={onOpenSearch}
+          className="w-full flex items-center justify-between p-3 sm:p-4 bg-white dark:bg-slate-900 border-2 border-indigo-500/30 dark:border-indigo-500/40 rounded-2xl shadow-2xl hover:border-indigo-500 cursor-pointer transition-all group"
+        >
+          <div className="flex items-center gap-3 text-slate-400">
+            <Search className="w-5 h-5 text-indigo-500 group-hover:scale-110 transition-transform" />
+            <span className="text-slate-500 dark:text-slate-400 text-sm sm:text-base font-sans">
+              Search tools (e.g. Merge, Compress, OCR, Rotate)...
+            </span>
           </div>
+          <kbd className="hidden sm:inline-block px-2.5 py-1 text-xs font-mono font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950 rounded-lg">
+            Ctrl + K
+          </kbd>
         </div>
-        </div>
-      </section>
+      </div>
 
       <AdSlot type="top-banner" />
 
