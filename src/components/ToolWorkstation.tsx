@@ -99,14 +99,14 @@ export const ToolWorkstation: React.FC<ToolWorkstationProps> = ({ tool }) => {
             subject: meta.subject || '',
             keywords: meta.keywords || ''
           });
-        } catch (e) {
+        } catch {
           /* ignore */
         }
       } else if (newFiles[0] && tool.id === 'pdf-info') {
         try {
           const info = await getPDFInfo(newFiles[0]);
           setPdfInfoData(info);
-        } catch (e) {
+        } catch {
           /* ignore */
         }
       }

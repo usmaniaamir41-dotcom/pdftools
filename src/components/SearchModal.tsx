@@ -22,16 +22,16 @@ export const SearchModal: React.FC<SearchModalProps> = ({
 
   useEffect(() => {
     if (isOpen) {
-      setTimeout(() => inputRef.current?.focus(), 50);
-      setSelectedIndex(0);
-    } else {
-      setQuery('');
+      const timer = setTimeout(() => inputRef.current?.focus(), 50);
+      return () => clearTimeout(timer);
     }
   }, [isOpen]);
 
-  useEffect(() => {
+  const handleClose = () => {
+    setQuery('');
     setSelectedIndex(0);
-  }, [query]);
+    onClose();
+  };
 
   if (!isOpen) return null;
 
@@ -46,10 +46,10 @@ export const SearchModal: React.FC<SearchModalProps> = ({
       e.preventDefault();
       if (filteredTools[selectedIndex]) {
         onSelectTool(filteredTools[selectedIndex].slug);
-        onClose();
+        handleClose();
       }
     } else if (e.key === 'Escape') {
-      onClose();
+      handleClose();
     }
   };
 
@@ -65,12 +65,15 @@ export const SearchModal: React.FC<SearchModalProps> = ({
             ref={inputRef}
             type="text"
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              setSelectedIndex(0);
+            }}
             placeholder="Search PDF tool (e.g. Merge, Compress, OCR, Rotate, Protect)..."
             className="w-full bg-transparent border-none text-slate-900 dark:text-white placeholder-slate-400 text-base focus:outline-none font-sans"
           />
           <button
-            onClick={onClose}
+            onClick={handleClose}
             className="p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
           >
             <X className="w-5 h-5" />
@@ -90,7 +93,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                   key={tool.id}
                   onClick={() => {
                     onSelectTool(tool.slug);
-                    onClose();
+                    handleClose();
                   }}
                   onMouseEnter={() => setSelectedIndex(index)}
                   className={`p-3 rounded-xl cursor-pointer flex items-center justify-between transition-colors ${
