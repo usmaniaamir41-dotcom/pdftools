@@ -49,10 +49,14 @@ export const HomePage: React.FC<HomePageProps> = ({
       />
 
       <HeroNetwork
-        title="APKPure Developer Console"
-        subtitle="Connect With the Worldwide Android Users Through APKPure Open Development Platform."
-        buttonText="Sign in"
-        buttonLink="#signin"
+        title="All Your PDF Tools in One Place"
+        subtitle="Compress, merge, split, convert, edit, sign, and manage PDF documents online with 100% privacy & zero server uploads."
+        buttonText="Explore PDF Tools"
+        buttonLink="#tools-section"
+        onButtonClick={() => {
+          const el = document.getElementById('tools-section');
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }}
       />
 
       <div className="max-w-xl mx-auto pt-2">
@@ -74,7 +78,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
       <AdSlot type="top-banner" />
 
-      <section ref={popularRef} className="reveal max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+      <section id="tools-section" ref={popularRef} className="reveal max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold text-slate-900 dark:text-white font-heading flex items-center gap-2">
             <Zap className="w-6 h-6 text-amber-500 fill-amber-500" /> Popular PDF Tools

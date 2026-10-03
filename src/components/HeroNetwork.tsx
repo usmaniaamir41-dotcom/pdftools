@@ -10,10 +10,10 @@ export interface HeroNetworkProps {
 }
 
 export const HeroNetwork: React.FC<HeroNetworkProps> = ({
-  title = 'APKPure Developer Console',
-  subtitle = 'Connect With the Worldwide Android Users Through APKPure Open Development Platform.',
-  buttonText = 'Sign in',
-  buttonLink = '#signin',
+  title = 'All Your PDF Tools in One Place',
+  subtitle = 'Compress, merge, split, convert, edit, sign, and manage PDF documents online with 100% privacy & zero server uploads.',
+  buttonText = 'Explore Tools',
+  buttonLink = '#tools-section',
   onButtonClick,
   className = ''
 }) => {
