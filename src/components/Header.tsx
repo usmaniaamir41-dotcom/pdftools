@@ -39,7 +39,7 @@ export const Header: React.FC<HeaderProps> = ({
         
         {/* Brand Logo */}
         <div className="flex items-center gap-2.5 sm:gap-3 cursor-pointer select-none" onClick={onNavigateHome}>
-          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center shadow-md shadow-indigo-500/20 text-white shrink-0">
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center shadow-md shadow-indigo-500/20 text-white shrink-0 transition-transform duration-300 hover:rotate-6 hover:scale-105">
             <FileText className="w-5 h-5 sm:w-6 sm:h-6" />
           </div>
           <div>
@@ -88,13 +88,15 @@ export const Header: React.FC<HeaderProps> = ({
             >
               <Layers className="w-4 h-4 text-indigo-500" />
               <span>Categories</span>
-              <ChevronDown className="w-4 h-4 opacity-70" />
+              <ChevronDown className={`w-4 h-4 opacity-70 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
             </button>
 
             {dropdownOpen && (
+              <div className="fixed inset-0 z-40" onClick={() => setDropdownOpen(false)} aria-hidden="true" />
+            )}
+            {dropdownOpen && (
               <div
-                className="absolute right-0 mt-2 w-64 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl py-2 z-50 animate-fade-in"
-                onMouseLeave={() => setDropdownOpen(false)}
+                className="absolute right-0 mt-2 w-64 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl py-2 z-50 animate-pop-in origin-top-right"
               >
                 <div className="px-3 py-1 text-xs font-bold uppercase text-slate-400 dark:text-slate-500 tracking-wider">
                   PDF Categories
@@ -139,7 +141,7 @@ export const Header: React.FC<HeaderProps> = ({
             className="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 transition-colors"
             aria-label="Toggle Theme"
           >
-            {darkMode ? <Sun className="w-5 h-5 text-amber-400" /> : <Moon className="w-5 h-5 text-indigo-600" />}
+            <span key={String(darkMode)} className="block animate-pop-in">{darkMode ? <Sun className="w-5 h-5 text-amber-400" /> : <Moon className="w-5 h-5 text-indigo-600" />}</span>
           </button>
 
           {/* Mobile Hamburger Toggle */}

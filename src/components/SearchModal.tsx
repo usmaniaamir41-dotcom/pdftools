@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Search, X, CornerDownLeft } from 'lucide-react';
 import { searchTools } from '../registry/tools';
+import { ToolIcon } from './ToolIcon';
 import type { PDFTool } from '../registry/tools';
 
 interface SearchModalProps {
@@ -21,13 +22,16 @@ export const SearchModal: React.FC<SearchModalProps> = ({
   const filteredTools = searchTools(query);
 
   useEffect(() => {
-    if (isOpen) {
-      const timer = setTimeout(() => inputRef.current?.focus(), 50);
-      return () => clearTimeout(timer);
-    }
+    if (!isOpen) return;
+    const t = setTimeout(() => inputRef.current?.focus(), 50);
+    return () => clearTimeout(t);
   }, [isOpen]);
 
-  const handleClose = () => {
+  const handleQuery = (v: string) => {
+    setQuery(v);
+    setSelectedIndex(0);
+  };
+  const close = () => {
     setQuery('');
     setSelectedIndex(0);
     onClose();
@@ -46,17 +50,17 @@ export const SearchModal: React.FC<SearchModalProps> = ({
       e.preventDefault();
       if (filteredTools[selectedIndex]) {
         onSelectTool(filteredTools[selectedIndex].slug);
-        handleClose();
+        close();
       }
     } else if (e.key === 'Escape') {
-      handleClose();
+      close();
     }
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-slate-950/60 backdrop-blur-md animate-fade-in">
+    <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-slate-950/60 backdrop-blur-md animate-fade-in" onMouseDown={(e) => { if (e.target === e.currentTarget) close(); }}>
       <div
-        className="w-full max-w-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[80vh]"
+        className="w-full max-w-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[80vh] animate-pop-in"
         onKeyDown={handleKeyDown}
       >
         <div className="relative p-4 border-b border-slate-200 dark:border-slate-800 flex items-center gap-3">
@@ -65,15 +69,12 @@ export const SearchModal: React.FC<SearchModalProps> = ({
             ref={inputRef}
             type="text"
             value={query}
-            onChange={(e) => {
-              setQuery(e.target.value);
-              setSelectedIndex(0);
-            }}
+            onChange={(e) => handleQuery(e.target.value)}
             placeholder="Search PDF tool (e.g. Merge, Compress, OCR, Rotate, Protect)..."
             className="w-full bg-transparent border-none text-slate-900 dark:text-white placeholder-slate-400 text-base focus:outline-none font-sans"
           />
           <button
-            onClick={handleClose}
+            onClick={close}
             className="p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
           >
             <X className="w-5 h-5" />
@@ -93,7 +94,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                   key={tool.id}
                   onClick={() => {
                     onSelectTool(tool.slug);
-                    handleClose();
+                    close();
                   }}
                   onMouseEnter={() => setSelectedIndex(index)}
                   className={`p-3 rounded-xl cursor-pointer flex items-center justify-between transition-colors ${
@@ -104,7 +105,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                 >
                   <div className="flex items-center gap-3 min-w-0">
                     <div className="w-9 h-9 rounded-lg bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0 font-bold text-xs">
-                      {tool.name.substring(0, 2).toUpperCase()}
+                      <ToolIcon name={tool.iconName} className="w-4 h-4" />
                     </div>
                     <div className="min-w-0">
                       <div className="flex items-center gap-2">

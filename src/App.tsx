@@ -1,12 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
+import { Loader2 } from 'lucide-react';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { SearchModal } from './components/SearchModal';
 import { HomePage } from './pages/HomePage';
-import { ToolWorkstation } from './components/ToolWorkstation';
+// The PDF engine (pdf-lib, pdf.js, jsPDF...) is large: only load it when a tool page is opened.
+const ToolWorkstation = lazy(() => import('./components/ToolWorkstation').then((m) => ({ default: m.ToolWorkstation })));
 import { RelatedTools } from './components/RelatedTools';
 import { LegalPage } from './pages/LegalPage';
 import { getToolBySlug } from './registry/tools';
+import { MetaTags } from './components/MetaTags';
 
 export function App() {
   const [darkMode, setDarkMode] = useState<boolean>(() => {
@@ -33,7 +36,7 @@ export function App() {
 
   useEffect(() => {
     const handlePopState = () => {
-      const path = window.location.pathname.replace(/^\//, '');
+      const path = window.location.pathname.replace(/^\/+|\/+$/g, '');
       if (!path) {
         setActiveSlug('home');
       } else {
@@ -71,14 +74,25 @@ export function App() {
         setDarkMode={setDarkMode}
       />
 
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 relative">
         {selectedTool ? (
-          <div className="space-y-8 sm:space-y-12">
-            <ToolWorkstation tool={selectedTool} />
+          <div key={selectedTool.id} className="space-y-8 sm:space-y-12">
+            <MetaTags title={selectedTool.seo.title} description={selectedTool.seo.metaDescription} tool={selectedTool} faqs={selectedTool.seo.faqs} />
+            {/* key => each tool starts with a clean state (files/results used to leak between tools) */}
+            <Suspense
+              fallback={
+                <div className="flex flex-col items-center justify-center gap-3 py-32 text-slate-500 animate-fade-in">
+                  <Loader2 className="w-8 h-8 animate-spin text-indigo-500" />
+                  <span className="text-sm">Loading tool…</span>
+                </div>
+              }
+            >
+              <ToolWorkstation key={selectedTool.id} tool={selectedTool} />
+            </Suspense>
             <RelatedTools currentToolId={selectedTool.id} onSelectTool={(slug) => navigateTo(slug)} />
           </div>
         ) : isLegalPage ? (
-          <LegalPage type={activeSlug as any} onNavigateHome={() => navigateTo('home')} />
+          <LegalPage key={activeSlug} type={activeSlug as any} onNavigateHome={() => navigateTo('home')} />
         ) : (
           <HomePage
             onSelectTool={(slug) => navigateTo(slug)}

@@ -55,7 +55,7 @@ export const TOOLS: PDFTool[] = [
     iconName: 'Combine',
     keywords: ['merge pdf', 'combine pdf', 'join pdf files', 'concatenate pdf', 'append pdf'],
     popular: true,
-    relatedToolIds: ['split-pdf', 'compress-pdf', 'organize-pdf', 'rotate-pdf'],
+    relatedToolIds: ['split-pdf', 'compress-pdf', 'rotate-pdf'],
     seo: {
       title: 'Merge PDF Online – Free & Secure PDF Combiner',
       metaDescription: 'Combine multiple PDF files into one consolidated PDF file online. Fast, browser-based, 100% free and private.',
@@ -89,7 +89,7 @@ export const TOOLS: PDFTool[] = [
     iconName: 'Split',
     keywords: ['split pdf', 'separate pdf pages', 'extract pdf pages', 'divide pdf', 'cut pdf'],
     popular: true,
-    relatedToolIds: ['merge-pdf', 'extract-pages', 'delete-pages', 'compress-pdf'],
+    relatedToolIds: ['merge-pdf', 'extract-pages', 'delete-pdf-pages', 'compress-pdf'],
     seo: {
       title: 'Split PDF Online – Separate PDF Pages Easily',
       metaDescription: 'Split PDF files into individual pages or specific page ranges. Free online tool with client-side privacy.',
@@ -153,7 +153,7 @@ export const TOOLS: PDFTool[] = [
     iconName: 'Image',
     keywords: ['pdf to jpg', 'pdf to image', 'convert pdf to jpeg', 'export pdf pages as jpg'],
     popular: true,
-    relatedToolIds: ['jpg-to-pdf', 'pdf-to-png', 'extract-images'],
+    relatedToolIds: ['jpg-to-pdf', 'extract-images'],
     seo: {
       title: 'PDF to JPG Converter Online – High Resolution Export',
       metaDescription: 'Convert PDF document pages to JPG images in high resolution. Extract all pages or specific pages to JPG.',
@@ -249,7 +249,7 @@ export const TOOLS: PDFTool[] = [
     iconName: 'RotateCw',
     keywords: ['rotate pdf', 'turn pdf pages', 'landscape to portrait pdf', 'flip pdf'],
     popular: false,
-    relatedToolIds: ['merge-pdf', 'organize-pdf', 'delete-pages'],
+    relatedToolIds: ['merge-pdf', 'delete-pdf-pages'],
     seo: {
       title: 'Rotate PDF Pages Online – Permanent PDF Rotation',
       metaDescription: 'Rotate PDF pages clockwise or counter-clockwise. Permanently fix upside-down or landscape pages.',
@@ -530,7 +530,7 @@ export const TOOLS: PDFTool[] = [
     iconName: 'FileText',
     keywords: ['pdf to text', 'extract text from pdf', 'pdf to txt', 'copy pdf text'],
     popular: false,
-    relatedToolIds: ['ocr-pdf', 'pdf-to-html', 'pdf-to-jpg'],
+    relatedToolIds: ['ocr-pdf', 'pdf-to-jpg'],
     seo: {
       title: 'PDF to Text Converter – Extract PDF Text Online',
       metaDescription: 'Extract text from PDF documents quickly. Download as TXT file or copy directly to clipboard.',

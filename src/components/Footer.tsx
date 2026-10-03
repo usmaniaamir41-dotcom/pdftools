@@ -8,7 +8,7 @@ interface FooterProps {
   onNavigatePage: (page: string) => void;
 }
 
-const currentYear = new Date().getFullYear();
+const YEAR = new Date().getFullYear();
 
 export const Footer: React.FC<FooterProps> = ({
   onSelectTool,
@@ -125,7 +125,7 @@ export const Footer: React.FC<FooterProps> = ({
 
         {/* Bottom Bar */}
         <div className="mt-12 pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
-          <p>© {currentYear} PDFCraft Platform. Built with web standard libraries (pdf-lib, pdfjs-dist, tesseract.js, jsPDF).</p>
+          <p>© {YEAR} PDFCraft Platform. Built with web standard libraries (pdf-lib, pdfjs-dist, tesseract.js, jsPDF).</p>
           <p className="flex items-center gap-1">
             Engineered for speed & privacy <Heart className="w-3.5 h-3.5 text-pink-500 fill-pink-500 inline" />
           </p>

@@ -2,6 +2,8 @@ import React from 'react';
 import { ArrowRight, Layers } from 'lucide-react';
 import { TOOLS } from '../registry/tools';
 import type { PDFTool } from '../registry/tools';
+import { ToolIcon } from './ToolIcon';
+import { spotlight } from '../hooks/useReveal';
 
 interface RelatedToolsProps {
   currentToolId: string;
@@ -42,14 +44,19 @@ export const RelatedTools: React.FC<RelatedToolsProps> = ({
         </h3>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 stagger">
         {related.map((tool: PDFTool, index: number) => (
           <div
             key={`${tool.id}-${index}`}
+            style={{ ['--i' as string]: index }}
+            onMouseMove={spotlight}
             onClick={() => onSelectTool(tool.slug)}
             className="tool-card group cursor-pointer"
           >
             <div className="flex items-center justify-between mb-3">
+              <span className="tool-icon w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 text-white flex items-center justify-center shadow-md shadow-indigo-500/20">
+                <ToolIcon name={tool.iconName} className="w-4 h-4" />
+              </span>
               <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400">
                 {tool.categoryName}
               </span>

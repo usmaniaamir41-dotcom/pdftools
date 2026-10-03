@@ -40,7 +40,19 @@ New-NetFirewallRule -DisplayName "Vite Dev Server (Port 5173)" -Direction Inboun
 
 ---
 
+## 🧪 Tests
+
+```
+npm test
+```
+
+Runs the engine against real PDFs (merge, split, encrypt/decrypt, compress, OCR-free tools, rotated pages, Unicode text…) and renders every tool page.
+
 ## ⚡ Features & Architecture
 - **100% Client-Side Engine**: All PDF operations (Merge, Split, Compress, Rotate, E-Sign, OCR, Watermark, Convert) execute entirely in browser memory.
 - **Dynamic HMR**: Real-time hot module replacement over local Wi-Fi.
 - **Zero Third-Party Tunnels**: No ngrok or public tunnel reliance for local network testing.
+- **Real encryption**: Protect PDF uses AES-256 (via `@cantoo/pdf-lib`); Unlock PDF decrypts with the password.
+- **Works on older browsers/phones**: uses pdf.js's *legacy* build (the modern build needs `Promise.try`) and bundles the worker instead of loading it from a CDN.
+- **Visual Sign & Edit**: click on a page preview to place signatures/text, drag to whiteout, highlight or draw.
+- **Non-Latin text**: Hindi, Kannada, Arabic, CJK etc. work in Watermark, Edit and Text/Markdown → PDF (rendered via the browser's fonts).
