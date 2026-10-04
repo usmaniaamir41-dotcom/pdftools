@@ -4,9 +4,10 @@
 @variant dark (&:where(.dark, .dark *));
 
 :root {
-  --apk-bg-from: #0f172a;
-  --apk-bg-to: #1e1b4b;
-  --apk-line: 129, 140, 248;
+  /* Page background (light mode) */
+  --apk-bg-from: #f8fafc;
+  --apk-bg-to: #eef2ff;
+  --apk-line: 79, 70, 229;
 
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-heading: 'Outfit', 'Inter', system-ui, sans-serif;
@@ -23,9 +24,9 @@
   --border-strong: rgba(203, 213, 225, 0.6);
   --border-accent: rgba(99, 102, 241, 0.4);
 
-  --text-primary: #f8fafc;
-  --text-secondary: #cbd5e1;
-  --text-muted: #94a3b8;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
   --text-inverse: #0f172a;
 
   --accent-primary: #6366f1;
@@ -83,6 +84,11 @@ html, body {
 }
 
 html.dark, body.dark {
+  /* Page background (dark mode) */
+  --apk-bg-from: #0f172a;
+  --apk-bg-to: #1e1b4b;
+  --apk-line: 129, 140, 248;
+
   --bg-primary: #0b0f19;
   --bg-secondary: #111827;
   --bg-tertiary: #1f2937;

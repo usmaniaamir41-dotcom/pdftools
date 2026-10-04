@@ -13,9 +13,15 @@ export const NetworkBackground: React.FC = () => {
     if (!ctx) return;
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const lineRGB = (
-      getComputedStyle(document.documentElement).getPropertyValue('--apk-line') || '129,140,248'
-    ).trim();
+    const readLineRGB = () =>
+      (getComputedStyle(document.documentElement).getPropertyValue('--apk-line') || '129,140,248').trim();
+    let lineRGB = readLineRGB();
+    // Theme toggles add/remove the `dark` class on <html>; refresh the line color when that happens.
+    const themeObserver = new MutationObserver(() => {
+      lineRGB = readLineRGB();
+      if (!running) draw();
+    });
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 
     let w = 0;
     let h = 0;
@@ -212,6 +218,7 @@ export const NetworkBackground: React.FC = () => {
 
     return () => {
       stop();
+      themeObserver.disconnect();
       window.removeEventListener('pointermove', setPointer);
       window.removeEventListener('pointerdown', setPointer);
       window.removeEventListener('pointerup', handlePointerUp);
